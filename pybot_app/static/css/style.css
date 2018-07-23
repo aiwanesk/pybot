@@ -1,0 +1,9 @@
+header, footer{
+    background-color: darkcyan;
+    padding: 10px;
+}
+
+section{
+    background-color: gainsboro;
+    padding: 20px;
+}

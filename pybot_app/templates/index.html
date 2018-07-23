@@ -1,0 +1,16 @@
+{% extends "layout.html" %}  
+
+{% block form %}
+    <p>Quelle adresse cherches-tu ?</p>
+    <form action="" method="POST" novalidate>
+        {# Add SECRET_KEY to protect the form with hidden tag #}
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.address.label }}
+            {{ form.address }}
+        </p>
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+{% endblock %}

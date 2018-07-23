@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>PyBot</title>
+        <meta name="description" content="OC - P7" />
+
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    </head>
+
+    <body>
+        
+        <header>
+            <i class="fas fa-robot fa-5x"></i>
+            <p>Le robot qui radote</p>
+        </header>
+
+        <section>
+            {% block form %}{% endblock %} 
+        </section>
+
+        <footer>
+            <p>Maëva Brunelles - 2018<br />
+            <a href="https://github.com/MaevaBrunelles"><i class="fab fa-github fa-2x"></i></a>
+            <a href="https://www.linkedin.com/in/maëva-brunelles-875463144/"><i class="fab fa-linkedin fa-2x"></i></a></p>
+        </footer>
+
+    </body>
+</html>
