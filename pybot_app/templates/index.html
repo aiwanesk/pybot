@@ -1,6 +1,17 @@
 {% extends "layout.html" %}  
 
 {% block form %}
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div style="background-color: white">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
     <p>Quelle adresse cherches-tu ?</p>
     <form action="" method="POST" novalidate>
         {# Add SECRET_KEY to protect the form with hidden tag #}
@@ -8,6 +19,9 @@
         <p>
             {{ form.address.label }}
             {{ form.address }}
+            {% for error in form.address.errors %}
+            <span style="color: red; font-weight: bold;">{{ error }}</span>
+            {% endfor %}
         </p>
         <p>
             {{ form.submit() }}
