@@ -11,6 +11,6 @@ def index():
     if form.validate_on_submit():
         address_ask = Parser(form.address.data)
         flash('Votre demande : {}'.format(form.address.data))
-        flash('Ma demande par la classe : ' + address_ask.cut_sentence())
+        flash('Ma demande par la classe : ' + address_ask.clean_sentence())
         return redirect(url_for('index'))
     return render_template('index.html', form=form)
