@@ -10,7 +10,7 @@ class Parser():
         self.sentence = sentence
 
     def clean_sentence(self):
-        """ 
+        """
         Clean the sentence passed in argument
         Return the main word of the sentence
         """
