@@ -33,6 +33,6 @@ class Map():
         return self._result[0]["lon"]
 
     @property
-    def address_details(self):
+    def details(self):
         """ Return a dictionnary with address details (house number, street, city...) """
         return self._result[0]["address"]
