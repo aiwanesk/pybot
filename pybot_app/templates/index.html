@@ -74,6 +74,9 @@
                                 'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                             id: 'mapbox.streets',
                         }).addTo(mymap);
+
+                        $('#bot-answer').append('<p>' + response['address']['wiki_informations'] + '</p>');
+                        $('#bot-answer').append('<a href="' + response['address']['wiki_link'] + '" target="_blank">' + response['address']['wiki_link'] + '</a>');
                     }
                     else{
                         $('#bot-answer').append('<p>Malheureusement, il semble que cet endroit ne soit pas encore repertorié sur OpenStreetMap. Nhésite pas à contribuer en le rajoutant toi-même : </p>');
