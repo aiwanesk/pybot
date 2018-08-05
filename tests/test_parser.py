@@ -5,9 +5,9 @@ import pytest
 from pybot_app.parser import Parser
 
 def test_clean_sentence():
-    """ 
-    Test the entire method. 
-    Must return the last word of the sentence. 
+    """
+    Test the entire method.
+    Must return the last word of the sentence.
     """
     sentence = Parser("Bonjour, savez-vous où se situe ma maison ?")
     assert sentence.clean_sentence() == "maison"

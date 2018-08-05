@@ -7,3 +7,11 @@ section{
     background-color: gainsboro;
     padding: 20px;
 }
+
+#mapid{
+    height: 180px;
+}
+
+#request{
+    background-color: white;
+}
