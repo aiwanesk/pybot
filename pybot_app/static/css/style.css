@@ -1,17 +1,70 @@
-header, footer{
-    background-color: darkcyan;
+
+header{
     padding: 10px;
+    height: 150px;
+}
+
+.black-filter{
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 150px;
+    position: absolute;
+}
+
+.h1{
+    font-weight: 200;
+    letter-spacing: 0.1em;
+}
+
+.white{
+    color: white;
+    position: relative;
+}
+
+.form{
+    background-color: rgb(6, 26, 58);
+}
+
+.answer{
+    background-color: #f9fafc;
+}
+
+footer{
+    background-color: rgb(6, 26, 58);
+    padding: 20px;
+    border-top: 3px solid #ffc107;
+}
+
+footer i{
+    color: #ffc107;
+}
+
+.i-margin{
+    margin: 0 10px;
+}
+
+footer p{
+    color: white;
+}
+
+.fullscreen{
+    /*height: 100vh;*/
+    overflow: auto;
+    min-height: 60vh;
 }
 
 section{
-    background-color: gainsboro;
     padding: 20px;
 }
 
-#mapid{
-    height: 180px;
+form{
+    margin: 15px 0;
 }
 
-#request{
-    background-color: white;
+.map{
+    height: 300px;
+}
+
+.margintop{
+    margin-top: 30px;
 }

@@ -1,5 +1,6 @@
 .vscode/
 Pipfile
+Pipfile.lock
 __pycache__/
 parser-solution-comprehension-list.py
 .pytest_cache/
