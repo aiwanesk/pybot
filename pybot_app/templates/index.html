@@ -9,12 +9,12 @@
         <form method="POST" novalidate class="row">
 
             <div class="col-lg-8">
-                {{ form.address.label(class_="sr-only") }}
-                {{ form.address(class_="col-lg-12 form-control") }}
+                {{ form.input_address.label(class_="sr-only") }}
+                {{ form.input_address(class_="col-lg-12 form-control") }}
             </div>
         
 
-        {% for error in form.address.errors %}
+        {% for error in form.input_address.errors %}
             <span style="color: red; font-weight: bold;">{{ error }}</span>
         {% endfor %}
 

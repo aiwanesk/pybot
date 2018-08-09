@@ -21,6 +21,11 @@ class Wiki():
         return _result
     
     @property
+    def entity(self):
+        """ Return the object entity """
+        return self._result[1]
+
+    @property
     def details(self):
         """ Return the object details """
         return self._result[2]
