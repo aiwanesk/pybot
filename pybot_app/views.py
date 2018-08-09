@@ -18,6 +18,7 @@ def osm_ajax_request():
     address = Map(address_keyword)
     # Call Wiki API
     address_informations = Wiki(address_keyword)
+    print(address_informations.entity)
     print(address_informations.details)
     print(address_informations.wiki_link)
 
@@ -27,17 +28,19 @@ def osm_ajax_request():
         address_longitude = address.longitude
         address_details = address.details
 
+        wiki_entity = address_informations.entity
         wiki_informations = address_informations.details
         wiki_link = address_informations.wiki_link
 
         return jsonify({'address': {
-                        'latitude': address_latitude,
-                        'longitude': address_longitude,
-                        'details': address_details,
-                        'wiki_informations': wiki_informations,
-                        'wiki_link': wiki_link
-                    }
-                })
+            'latitude': address_latitude,
+            'longitude': address_longitude,
+            'details': address_details,
+            'wiki_entity': wiki_entity,
+            'wiki_informations': wiki_informations,
+            'wiki_link': wiki_link
+        }
+    })
     except:
         return jsonify({'error' : "Cette adresse n'est pas répertoriée sur OpenStreetMap.org",
                         'status_code' : 404

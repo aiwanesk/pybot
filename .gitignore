@@ -4,3 +4,4 @@ Pipfile.lock
 __pycache__/
 parser-solution-comprehension-list.py
 .pytest_cache/
+tests/test_wiki.py
