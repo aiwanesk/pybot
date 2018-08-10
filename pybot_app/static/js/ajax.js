@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+    // Declare outside the assignement value zone to skip conflict between two requests
     var mymap;
 
     $("form").submit(function(e){
@@ -12,10 +12,12 @@ $(document).ready(function(){
         $("#map").html('<i class="fas fa-circle-notch fa-spin fa-2x"></i>');
         $("#map").addClass('map');
 
+        // Ajax call
         $.post('/ajax-osm', {
+            // Call the ajax-osm view in Flask views.py
             address_request : address_request
         }).done(function(response){
-            
+            // If API calls return data...
             if (response['address']){
                 var latitude = response['address']['latitude'];
                 var longitude = response['address']['longitude'];
@@ -55,9 +57,15 @@ $(document).ready(function(){
                 $('#wiki').addClass('answer');
             }
             else{
+                // If API calls don't return data...
+                // Clean all div, to delete previous request informations
+                $("#address").empty();
+                $("#map").empty();
+                $("#wiki").empty();
+
                 $('#address').addClass('answer');
-                $('#address').append('<p>Malheureusement, il me semble que cet endroit n\'est pas encore repertorié sur OpenStreetMap. Nhésite pas à contribuer en le rajoutant toi-même : </p>');
-                $('#address').append('<a href="https://www.openstreetmap.org/" target="_blank">https://www.openstreetmap.org/</a>');
+                $('#address').append('<span>Malheureusement, <span class="font-weight-bold">' + address_request + '</span> ne semble pas encore repertorié sur OpenStreetMap. Si tu connais l\'endroit, tu peux contribuer en le rajoutant toi-même à OpenStreetMap : <a href="https://www.openstreetmap.org/" target="_blank">https://www.openstreetmap.org/</a></span>');
+                $('#address').append('<p class="p-margintop">Le monde entier te dira merci ! :)</p>');
             }
         }).fail(function(response){
             console.log(response)
