@@ -3,6 +3,8 @@
 import requests
 
 class Wiki():
+    """ Manage the call and results of Wiki Media API """
+
     def __init__(self, address_keyword):
         self.address_keyword = address_keyword
         self._result = self._get_wiki_informations()

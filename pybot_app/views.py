@@ -1,4 +1,5 @@
 """ Views function """
+
 from flask import render_template, jsonify, request
 from pybot_app import app
 from pybot_app.form import AddressForm
@@ -18,9 +19,6 @@ def osm_ajax_request():
     address = Map(address_keyword)
     # Call Wiki API
     address_informations = Wiki(address_keyword)
-    print(address_informations.entity)
-    print(address_informations.details)
-    print(address_informations.wiki_link)
 
     # Get address informations
     try:

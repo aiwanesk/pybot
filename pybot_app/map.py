@@ -3,7 +3,7 @@
 import requests
 
 class Map():
-    """ Manage the call and results of OpenStreetMap.org API"""
+    """ Manage the call and results of OpenStreetMap.org API """
 
     def __init__(self, address_keyword):
         self.address_keyword = address_keyword
