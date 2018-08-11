@@ -35,10 +35,21 @@ $(document).ready(function(){
                 var wiki_link = response['address']['wiki_link'];
                 var wiki_answer = response['address']['wiki_answer'];
 
-                // Clean the div in case of new request in the same session
-                //$("#address").empty();
+                if(typeof address_details['road'] == 'undefined'){
+                    var address_road = ', plus précisement dans la rue ' + address_details['road'];
+                    var road = true;
+                }
+                
                 // Display the address
-                $("#address").append('<span>' + address_answer + '<span class="font-weight-bold">' + wiki_entity + '</span> se situe dans la région de ' + address_details['state'] + ' en ' + address_details['country'] + '.</span>');
+                $("#address").append(
+                    '<span>' + address_answer + 
+                    '<span class="font-weight-bold">' + wiki_entity + 
+                    '</span> se situe dans la région ' + address_details['state'] +
+                    ' en ' + address_details['country'] +
+                    // If road is declared in API, display it
+                    (typeof address_details['road'] == 'undefined' ? '' : ', plus précisement dans la rue ' + address_details['road']) + 
+                    '.</span>'
+                );
                 if (!$("#address").hasClass('answer')) {
                     $("#address").addClass('answer');
                 }
@@ -67,8 +78,23 @@ $(document).ready(function(){
                 
                 // Display the Wiki informations
                 $('#wiki').empty();
-                $('#wiki').append('<p>' + wiki_answer + wiki_informations + '</p>');
-                $('#wiki').append('<span>Si ça ne te suffit pas, je laisse Wikipédia t\'en dire plus : <a href="' + wiki_link + '" target="_blank">' + wiki_link + '</a></span>');
+                // If there is no wiki informations
+                if(wiki_informations[0].length == 0){
+                    $('#wiki').append(
+                        '<p>Cependant, je ne suis pas encore allée là-bas, alors je te laisse découvrir sur Wikipédia cet endroit : <a href="' + wiki_link + 
+                        '" target="_blank">' + wiki_link + 
+                        '</a></p>'
+                    );
+                }
+                else{
+                    $('#wiki').append('<p>' + wiki_answer + wiki_informations + '</p>');
+                    $('#wiki').append(
+                        '<span>Si tu veux être incollable sur le sujet, je laisse Wikipédia t\'en dire plus : <a href="' + wiki_link + 
+                        '" target="_blank">' + wiki_link + 
+                        '</a></span>'
+                    );
+                }
+                
                 if (!$("#wiki").hasClass('col-8 p-3 rounded answer')) {
                     $("#wiki").addClass('col-8 p-3 rounded answer');
                 }
@@ -86,8 +112,12 @@ $(document).ready(function(){
                 if (!$("#address").hasClass('answer')) {
                     $("#address").addClass('answer');
                 }
-                $('#address').append('<span>' + error_answer + ' Malheureusement, <span class="font-weight-bold">' + address_request + '</span> ne semble pas encore repertorié sur OpenStreetMap. Si tu connais l\'endroit, tu peux contribuer en le rajoutant toi-même à OpenStreetMap : <a href="https://www.openstreetmap.org/" target="_blank">https://www.openstreetmap.org/</a></span>');
-                $('#address').append('<p class="p-margintop">Le monde entier te dira merci, crois-en mon expérience ! :)</p>');
+                $('#address').append(
+                    '<span>' + error_answer + 
+                    ' Malheureusement, <span class="font-weight-bold">' + address_request + 
+                    '</span> ne semble pas encore repertorié sur OpenStreetMap. Si tu connais l\'endroit, tu peux contribuer en le rajoutant toi-même ici : <a href="https://www.openstreetmap.org/" target="_blank">https://www.openstreetmap.org/</a></span>'
+                );
+                $('#address').append('<p class="p-margintop">Le monde entier te dira merci, crois-en mon expérience ! ;)</p>');
             }
         }).fail(function(response){
             console.log(response)
