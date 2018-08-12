@@ -25,14 +25,14 @@ class Wiki():
     @property
     def entity(self):
         """ Return the object entity """
-        return self._result[1]
+        return self._result[1][0]
 
     @property
     def details(self):
         """ Return the object details """
-        return self._result[2]
+        return self._result[2][0]
     
     @property
     def wiki_link(self):
         """ Return the object Wikipedia link """
-        return self._result[3]
+        return self._result[3][0]

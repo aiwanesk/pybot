@@ -79,7 +79,7 @@ $(document).ready(function(){
                 // Display the Wiki informations
                 $('#wiki').empty();
                 // If there is no wiki informations
-                if(wiki_informations[0].length == 0){
+                if(wiki_informations.length == 0){
                     $('#wiki').append(
                         '<p>Cependant, je ne suis pas encore allée là-bas, alors je te laisse découvrir sur Wikipédia cet endroit : <a href="' + wiki_link + 
                         '" target="_blank">' + wiki_link + 
