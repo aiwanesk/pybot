@@ -9,7 +9,7 @@ class BotAnswer():
     """
 
     def __init__(self):
-        self.answer = {
+        self._answer = {
             "address_answer": [
                 "Salut mon bichon :) ",
                 "Bonjour toi ! Comment ça va aujourd'hui ? ",
@@ -31,11 +31,11 @@ class BotAnswer():
         """ Return a random answer by category (address, wiki, error) """
 
         if answer_type == "address":
-            return choice(self.answer["address_answer"])
+            return choice(self._answer["address_answer"])
         elif answer_type == "wiki":
-            return choice(self.answer["wiki_answer"])
+            return choice(self._answer["wiki_answer"])
         elif answer_type == "error":
-            return choice(self.answer["error_answer"])
+            return choice(self._answer["error_answer"])
 
     @property
     def random_address_answer(self):

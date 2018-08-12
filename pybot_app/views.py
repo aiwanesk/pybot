@@ -61,7 +61,6 @@ def osm_ajax_request():
             'error_answer': error_answer
         })
 
-
 @app.route('/')
 def index():
     """ Display the index page with Flask form """
