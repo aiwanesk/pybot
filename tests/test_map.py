@@ -1,54 +1,52 @@
-""" Mock test for Map class """
+""" Mock tests for Map() class """
 
 import requests
-from pytest import fixture
-import json
 
 from pybot_app.map import Map
 
-paris_fake_response = """[
-        {
-            "lat": "49.8566101",
-            "lon": "2.3514993",
-            "address": {
-                "city": "Paris",
-                "county": "Paris",
-                "state": "Île-de-France",
-                "country": "France",
-                "country_code": "fr"
-            }
-        }
-    ]"""
+FAKE_MAP_RESPONSE = [{
+    "lat": "12.3456789",
+    "lon": "9.87654321",
+    "address": {
+        "city": "Fake city",
+        "state": "Fake state",
+        "country": "Fake country",
+        "country_code": "Fake country code"
+    }
+}]
 
-@fixture(scope="function")
-def mocked_request(monkeypatch):
-    """ Mock an API OSM call to get address informations from a keyword """
-    class MockedResult(object):
+class FakeResponseFromRequestsGet:
+    """ Class who is a mock of the Response object given by Requests.get() with a json method """
+    def json(self):
+        """ Return the fake response """
+        return FAKE_MAP_RESPONSE
 
-        def __init__(self, results):
-            self.results = results
+def fake_requests_get(*args, **kwargs):
+    """ Function who is a mock of Requests.get() """
+    return FakeResponseFromRequestsGet()
 
-        def json(self):
-            return json.loads(self.results)
+def test_map(monkeypatch):
+    """ Test if the Wiki constructor is not crashing """
+    # Monkeypatch replace requests.get() by our fake_responses_get mock
+    monkeypatch.setattr(requests, 'get', fake_requests_get)
+    assert Map("test")
 
-    def mockreturn(request):
-        return MockedResult(paris_fake_response)
+def test_latitude(monkeypatch):
+    """ Test the latitude return """
+    monkeypatch.setattr(requests, 'get', fake_requests_get)
+    assert Map("test").latitude == "12.3456789"
 
-    monkeypatch.setattr(requests, 'get', mockreturn)
+def test_longitude(monkeypatch):
+    """ Test the longitude return """
+    monkeypatch.setattr(requests, 'get', fake_requests_get)
+    assert Map("test").longitude == "9.87654321"
 
-
-def test_http_return(mocked_request):
-    
-    assert Map("paris")._get_map_informations() == paris_fake_response
-
-def test_latitude(mocked_request):
-    """ Test the latitude recovery """
-    assert Map("paris").latitude == "49.8566101"
-
-def test_longitude(mocked_request):
-    """ Test the longitude recovery """
-    assert Map("paris").longitude == "2.3514993"
-
-def test_details(mocked_request):
-    """ Test the address details recovery """
-    assert Map("paris").details == {'city': 'Paris', 'county': 'Paris', 'state': 'Île-de-France', 'country': 'France', 'country_code': 'fr'}
+def test_details(monkeypatch):
+    """ Test the address details return """
+    monkeypatch.setattr(requests, 'get', fake_requests_get)
+    assert Map("test").details == {
+        "city": "Fake city",
+        "state": "Fake state",
+        "country": "Fake country",
+        "country_code": "Fake country code"
+    }

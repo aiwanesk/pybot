@@ -18,33 +18,33 @@ FAKE_WIKI_RESPONSE = [
     ]
 ]
 
-def fake_response_get(*args, **kwargs):
-    """ Function who is a mock Requests.get() """
-    return FakeResponse()
+def fake_requests_get(*args, **kwargs):
+    """ Function who is a mock of Requests.get() """
+    return FakeResponseFromRequestsGet()
 
-class FakeResponse:
+class FakeResponseFromRequestsGet:
     """ Class who is a mock of the Response object given by Requests.get() with a json method """
     def json(self):
         """ Return the fake response """
         return FAKE_WIKI_RESPONSE
 
-def test_wiki_ctor(monkeypatch):
+def test_wiki(monkeypatch):
     """ Test if the Wiki constructor is not crashing """
-    # Monkeypatch replace requests.get() by our fake_responses_get mock 
-    monkeypatch.setattr(requests, 'get', fake_response_get)
+    # Monkeypatch replace requests.get() by our fake_responses_get mock
+    monkeypatch.setattr(requests, 'get', fake_requests_get)
     assert Wiki("test")
 
 def test_wiki_entity(monkeypatch):
     """ Test the wiki entity return """
-    monkeypatch.setattr(requests, 'get', fake_response_get)
+    monkeypatch.setattr(requests, 'get', fake_requests_get)
     assert Wiki("test").entity == "Wiki Title"
 
 def test_wiki_details(monkeypatch):
     """ Test the wiki details return """
-    monkeypatch.setattr(requests, 'get', fake_response_get)
+    monkeypatch.setattr(requests, 'get', fake_requests_get)
     assert Wiki("test").details == "Wiki short description"
 
 def test_wiki_link(monkeypatch):
     """ Test the wiki link return """
-    monkeypatch.setattr(requests, 'get', fake_response_get)
+    monkeypatch.setattr(requests, 'get', fake_requests_get)
     assert Wiki("test").wiki_link == "https://fake-wiki.com"
