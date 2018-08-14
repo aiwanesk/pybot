@@ -1,12 +1,3 @@
-// Clean all div, to delete previous request informations
-function clean_all_div(){
-    $("#address").empty();
-    $("#map").empty();
-    $("#map").removeClass();
-    $("#wiki").empty();
-    $("#wiki").removeClass();
-}
-
 $(document).ready(function(){
     // Declare outside the assignement value zone to skip conflict between two requests
     var mymap;
@@ -20,9 +11,7 @@ $(document).ready(function(){
         // Waiting for API response...
         $("#address").empty();
         $("#address").removeClass();
-        if (!$("#address").hasClass('col-8 p-3 rounded text-center')) {
-            $("#address").addClass('col-8 p-3 rounded text-center');
-        }
+        add_class_to('#address', 'col-8 p-3 rounded text-center');
         $("#address").append('<i class="fas fa-circle-notch fa-spin fa-2x"></i>');
 
         // Ajax call
@@ -40,9 +29,7 @@ $(document).ready(function(){
                 $('#address').append(
                     '<span>Je ne vois pas ce que tu veux dire. Tu es sûr·e de chercher un endroit du monde ? <i class="fas fa-grimace"></i></span>'
                 );
-                if (!$("#address").hasClass('answer')) {
-                    $("#address").addClass('answer');
-                }
+                add_class_to('#address', 'answer');
             }
 
             else if (response['address']){
@@ -70,9 +57,7 @@ $(document).ready(function(){
                     (typeof address_details['road'] == 'undefined' ? '' : ', plus précisement dans la rue ' + address_details['road']) + 
                     '. <i class="fas fa-grin-alt"></i></span>'
                 );
-                if (!$("#address").hasClass('answer')) {
-                    $("#address").addClass('answer');
-                }
+                add_class_to('#address', 'answer');
 
                 // Delete map reference to use the a new map when a new request come
                 if (typeof mymap !== 'undefined'){
@@ -92,9 +77,7 @@ $(document).ready(function(){
                     id: 'mapbox.streets',
                 }).addTo(mymap);
 
-                if (!$("#map").hasClass('col-8 map')) {
-                    $("#map").addClass('col-8 map');
-                }
+                add_class_to('#map', 'col-8 map')
                 
                 // Display the Wiki informations
                 $('#wiki').empty();
@@ -115,9 +98,7 @@ $(document).ready(function(){
                     );
                 }
                 
-                if (!$("#wiki").hasClass('col-8 p-3 rounded answer')) {
-                    $("#wiki").addClass('col-8 p-3 rounded answer');
-                }
+                add_class_to('#wiki', 'col-8 p-3 rounded answer')
             }
             else{
                 // If API calls don't return data...
@@ -126,9 +107,7 @@ $(document).ready(function(){
                 
                 clean_all_div()
 
-                if (!$("#address").hasClass('answer')) {
-                    $("#address").addClass('answer');
-                }
+                add_class_to('#address', 'answer')
                 $('#address').append(
                     '<span>' + error_answer + 
                     ' Malheureusement, <span class="font-weight-bold">' + address_keyword + 
