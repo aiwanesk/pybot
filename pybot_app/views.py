@@ -21,7 +21,12 @@ def osm_ajax_request():
     # Initialize an object to parse the data sent in form
     client_ask = Parser(result)
     # Get the main address keyword
-    address_keyword = client_ask.clean_sentence()
+    try:
+        address_keyword = client_ask.clean_sentence()
+    except ValueError:
+        return jsonify({
+            'answer_error': True
+        })
     # Call OSM API
     address = Map(address_keyword)
     # Call Wiki API
@@ -50,15 +55,14 @@ def osm_ajax_request():
             'wiki_informations': wiki_informations,
             'wiki_link': wiki_link,
             'wiki_answer': wiki_answer
-        }
-    })
+            }
+        })
     except:
         error_answer = pybot_answer.random_error_answer
 
         return jsonify({
-            'error': "Cette adresse n'est pas répertoriée sur OpenStreetMap.org",
-            'status_code': 404,
-            'error_answer': error_answer
+            'error_answer': error_answer,
+            'address_keyword': address_keyword
         })
 
 @app.route('/')

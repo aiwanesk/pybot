@@ -1,3 +1,12 @@
+// Clean all div, to delete previous request informations
+function clean_all_div(){
+    $("#address").empty();
+    $("#map").empty();
+    $("#map").removeClass();
+    $("#wiki").empty();
+    $("#wiki").removeClass();
+}
+
 $(document).ready(function(){
     // Declare outside the assignement value zone to skip conflict between two requests
     var mymap;
@@ -25,7 +34,18 @@ $(document).ready(function(){
             $("#address").empty();
             $("#address").removeClass('text-center');
 
-            if (response['address']){
+            if (response['answer_error']){
+                clean_all_div()
+
+                $('#address').append(
+                    '<span>Je ne vois pas ce que tu veux dire. Tu es sûr·e de chercher un endroit du monde ? <i class="fas fa-grimace"></i></span>'
+                );
+                if (!$("#address").hasClass('answer')) {
+                    $("#address").addClass('answer');
+                }
+            }
+
+            else if (response['address']){
                 var latitude = response['address']['latitude'];
                 var longitude = response['address']['longitude'];
                 var address_details = response['address']['details'];
@@ -48,7 +68,7 @@ $(document).ready(function(){
                     ' en ' + address_details['country'] +
                     // If road is declared in API, display it
                     (typeof address_details['road'] == 'undefined' ? '' : ', plus précisement dans la rue ' + address_details['road']) + 
-                    '.</span>'
+                    '. <i class="fas fa-grin-alt"></i></span>'
                 );
                 if (!$("#address").hasClass('answer')) {
                     $("#address").addClass('answer');
@@ -83,7 +103,7 @@ $(document).ready(function(){
                     $('#wiki').append(
                         '<p>Cependant, je ne suis pas encore allée là-bas, alors je te laisse découvrir sur Wikipédia cet endroit : <a href="' + wiki_link + 
                         '" target="_blank">' + wiki_link + 
-                        '</a></p>'
+                        '</a> <i class="fas fa-smile-wink"></i></p>'
                     );
                 }
                 else{
@@ -91,7 +111,7 @@ $(document).ready(function(){
                     $('#wiki').append(
                         '<span>Si tu veux être incollable sur le sujet, je laisse Wikipédia t\'en dire plus : <a href="' + wiki_link + 
                         '" target="_blank">' + wiki_link + 
-                        '</a></span>'
+                        '</a> <i class="fas fa-smile-wink"></i></span>'
                     );
                 }
                 
@@ -102,22 +122,19 @@ $(document).ready(function(){
             else{
                 // If API calls don't return data...
                 var error_answer = response['error_answer'];
-                // Clean all div, to delete previous request informations
-                $("#address").empty();
-                $("#map").empty();
-                $("#map").removeClass();
-                $("#wiki").empty();
-                $("#wiki").removeClass();
+                var address_keyword = response['address_keyword'];
+                
+                clean_all_div()
 
                 if (!$("#address").hasClass('answer')) {
                     $("#address").addClass('answer');
                 }
                 $('#address').append(
                     '<span>' + error_answer + 
-                    ' Malheureusement, <span class="font-weight-bold">' + address_request + 
+                    ' Malheureusement, <span class="font-weight-bold">' + address_keyword + 
                     '</span> ne semble pas encore repertorié sur OpenStreetMap. Si tu connais l\'endroit, tu peux contribuer en le rajoutant toi-même ici : <a href="https://www.openstreetmap.org/" target="_blank">https://www.openstreetmap.org/</a></span>'
                 );
-                $('#address').append('<p class="p-margintop">Le monde entier te dira merci, crois-en mon expérience ! ;)</p>');
+                $('#address').append('<p class="p-margintop">Le monde entier te dira merci, crois-en mon expérience ! <i class="fas fa-smile-wink"></i></p>');
             }
         }).fail(function(response){
             console.log(response)
