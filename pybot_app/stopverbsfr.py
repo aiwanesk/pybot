@@ -84,5 +84,17 @@ STOP_PRESENT_VERBS_FR = [
     "découvres",
     "découvrons",
     "découvrez",
-    "découvrent"
+    "découvrent",
+    "trouver",
+    "trouve",
+    "trouves",
+    "trouvons",
+    "trouvez",
+    "trouvent",
+    "retrouver",
+    "retrouve",
+    "retrouves",
+    "retrouvons",
+    "retrouvez",
+    "retrouvent"
 ]
