@@ -8,7 +8,7 @@ PyBot is currently available in French :fr:.
 
 ### Inline application
 
-Just click here : <link is coming> and enjoy it !
+Just click here : `link is coming` and enjoy it !
 
 ### From sources
 
@@ -46,6 +46,9 @@ This will launch Flask server. You can visit localhost at https://127.0.0.1:5000
 Out of inspiration ? Here are some usecases to see differents PyBot answers.
 
 > Bonjour PyBot !
+
 > Ok PyBot, donne-moi l'adresse d'Openclassrooms maintenant
+
 > Bon, et tu sais où se situe OVH ?
+
 > Super ! Je n'ai plus qu'à retrouver mon dentier...
