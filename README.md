@@ -6,9 +6,9 @@ PyBot is currently available in French :fr:.
 
 ## Utilisation
 
-### Inline application
+### Online application
 
-Just click here : `link is coming` and enjoy it !
+Just click here : https://pybot-oc.herokuapp.com/ and enjoy it !
 
 ### From sources
 

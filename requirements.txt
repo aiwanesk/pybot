@@ -2,3 +2,4 @@ flask
 flask-wtf
 requests
 Flask-Bootstrap4
+gunicorn
