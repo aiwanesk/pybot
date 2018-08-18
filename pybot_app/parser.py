@@ -36,7 +36,6 @@ class Parser():
             if (len(word) == 1 and word in string.punctuation) or (word in STOP_WORDS_FR) or (word in STOP_PRESENT_VERBS_FR):
                 continue
 
-            #Todo : manage "y-a-t'il" case = double punctation mark in the same word
             for lettre in word:
                 if lettre not in string.punctuation:
                     word_to_add = True
